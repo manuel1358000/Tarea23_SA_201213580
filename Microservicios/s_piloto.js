@@ -7,10 +7,8 @@ app.post('/aviso_piloto', function (req, res) {
     res.send('Aviso a Piloto Existoso');
     console.log('Solicitud de Servicio del cliente '+req.body['nombre']+' ID: '+req.body['id']);
 });
-
-
 app.post('/ubicacion_piloto', function (req, res) {
-    let json={'latitud':0,'longitud':0};
+    let json={'latitud':Math.floor(Math.random() * (1500 -100)) + 100,'longitud':Math.floor(Math.random() * (1500 -100)) + 100};
     res.send(json);
 });
 

@@ -16,10 +16,35 @@ app.post('/aviso_piloto', function (req, res) {
     });
 });
 
+app.post('/ubicacion_piloto', function (req, res) {
+    UbicacionPiloto().then(function(body){
+        res.send(body);
+    });
+});
+
+
 app.listen(3000, () => {
  console.log("El ESB esta en el puerto 3000");
 });
 
+function UbicacionPiloto(json){
+    const promise=new Promise(function(resolve,reject){    
+        //se consume el servicio por medio de un request POST, en el cual le enviamos en el body el json con la informacion del cliente
+        var jsonDataObj =json;
+        request({
+            method: "POST",
+            url:'http://localhost:3002/ubicacion_piloto',
+        },function(error,response,body){
+            //si ocurre un error al solicitar la respuesta, se muestra la alerta
+            if(error!=null){
+                reject('Ocurrio un Error reject');
+            }else{
+                resolve(body);    
+            }
+        });
+    });
+    return promise;
+}
 
 function EnviarAvisoPiloto(json){
     const promise=new Promise(function(resolve,reject){    
