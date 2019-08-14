@@ -3,6 +3,7 @@ var request=require('request');
 function obtenerNombre(){
     //la variable promise, es un componente que nos permite realizar la lectura del nombre de manera sincrona hasta que termine de ingresar el contenido va a ejecutar la funcion que consume el servicio
     const promise=new Promise(function(resolve,reject){
+        console.log('Solicitud de Servicio');
         console.log('Ingrese Nombre');
         var stdin=process.openStdin();
         stdin.addListener('data',function(data){
@@ -28,11 +29,17 @@ function enviarSolicitud(nombre){
         if(error!=null){
             console.log('Ocurrio un error inesperado, el servicio no esta disponible, intente nuevamente');
             //finalizamos el servicio para que ingrese una nueva solicitud el usuario
-            process.exit(1);
+            obtenerNombre().then(function(nombre){
+                //la variable nombre contiene el nombre que el cliente ingreso para solicitar el UBER
+                enviarSolicitud(nombre);
+            });
         }else{
             //en esta parte nos retorna la respuesta del servicio
             console.log(body);
-            process.exit(1);    
+            obtenerNombre().then(function(nombre){
+                //la variable nombre contiene el nombre que el cliente ingreso para solicitar el UBER
+                enviarSolicitud(nombre);
+            });
         }
     });
 }
