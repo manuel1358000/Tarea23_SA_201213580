@@ -1,7 +1,7 @@
-# Tarea 2 y 3 Laboratorio Software Avanzado
+# Tarea 4 Laboratorio Software Avanzado
 
 
-Acontinuacion se encuentran las generalidades de la tarea 2 y 3 del laboratorio de software avanzado, el cual se trata de una implementacion de un orquestador de servicios ESB, y el desarrollo de microservicios que simulan funcionalidades del servicio UBER.
+Acontinuacion se encuentran las generalidades de la tarea 4 del laboratorio de software avanzado, el cual se trata de una implementacion de un orquestador de servicios ESB, y el desarrollo de microservicios que simulan funcionalidades del servicio UBER.
 
 ## Comenzando 🚀
 
@@ -19,6 +19,8 @@ Las herramientas utilizadas para el deploy del proyecto son:
 * [VSCode](https://code.visualstudio.com/) - VS-Code
 * [Github](https://github.com/) - GitHub
 * [NodeJs](https://nodejs.org/es/) - NodeJS
+* Apache ODE
+* Eclipse
 
 
 ## Versionado 📌
