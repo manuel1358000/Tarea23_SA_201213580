@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://helloWorld"
+                  xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  targetNamespace="http://helloWorld">
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+              elementFormDefault="qualified"
+              targetNamespace="http://helloWorld">
+         <element name="HelloWorldRequest">
+            <complexType>
+               <sequence>
+                  <element name="input" type="string"/>
+               </sequence>
+            </complexType>
+         </element>
+         <element name="HelloWorldResponse">
+            <complexType>
+               <sequence>
+                  <element name="result" type="string"/>
+               </sequence>
+            </complexType>
+         </element>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="HelloWorldRequestMessage">
+      <wsdl:part name="payload" element="tns:HelloWorldRequest"/>
+   </wsdl:message>
+   <wsdl:message name="HelloWorldResponseMessage">
+      <wsdl:part name="payload" element="tns:HelloWorldResponse"/>
+   </wsdl:message>
+   <wsdl:portType name="HelloWorldPortType">
+      <wsdl:operation name="process">
+         <wsdl:input message="tns:HelloWorldRequestMessage" wsaw:Action="http://helloWorld/process"/>
+         <wsdl:output message="tns:HelloWorldResponseMessage"
+                      wsaw:Action="http://helloWorld/HelloWorld/processResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="HelloWorldSOAPBinding" type="tns:HelloWorldPortType">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+      <wsdl:operation name="process">
+         <soap:operation soapAction="http://helloWorld/process" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="HelloWorld">
+      <wsdl:port name="HelloWorldProcessPort" binding="tns:HelloWorldSOAPBinding">
+         <soap:address location="http://localhost:8080/ode/processes/HelloWorld.HelloWorldProcessPort/"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
